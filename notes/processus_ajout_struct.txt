@@ -1,0 +1,5 @@
+ - Ajouter une entrée dans l'enum "MavlinkStructName"
+ - Ajouter la classe qui hérite de "BaseMavlinkStructData"
+ - Créer une nouvelle classe qui implémente 'MavlinkConverter" (possibilité de créer l'enum "xxHeaders" si envie)
+ 	--> Ajouter cette classe dans les converters de MavlinkStructConverter
+ - Compléter les Visitors (qui devraient être marqués d'une erreur normalement)

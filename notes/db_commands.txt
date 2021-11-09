@@ -1,0 +1,7 @@
+CREATE USER droneuser WITH ENCRYPTED PASSWORD 'dronepassword';
+CREATE DATABASE drone_data_test;
+GRANT ALL PRIVILEGES ON DATABASE drone_data_test TO droneuser;
+CREATE DATABASE drone_data_prod;
+GRANT ALL PRIVILEGES ON DATABASE drone_data_prod TO droneuser;
+
+==> LA BDD DOIT CHANGER SELON QUE L'ON TESTE OU QUE L'ON UTILISE REELEMENT (dans le application.properties) !!!!!

@@ -1,0 +1,10 @@
+==== DESCRIPTION ====
+	On a en entrée un dossier et un id : on doit aller chercher dans le dossier tous les fichiers avec le nom voulu
+	(nom de structure + id + ".csv") et lire uniquement ces fichiers à partir de cet id.
+	
+	Pour chaque fichier, on va lire 50 lignes à la fois (batch) et faire l'insertion en BDD :
+	
+	
+==== BUT ====
+
+	On veut finir avec un programme ou l'on lit les fichiers dans une struct générale en mode MavlinkStructData

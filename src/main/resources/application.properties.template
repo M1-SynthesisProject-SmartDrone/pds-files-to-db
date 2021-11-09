@@ -1,0 +1,7 @@
+database.driver=postgresql
+database.name=drone_data_test
+database.host=localhost
+database.user=droneuser
+database.password=dronepaswword
+
+csv.separator=;
