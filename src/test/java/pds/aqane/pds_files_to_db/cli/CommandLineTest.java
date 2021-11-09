@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import pds.aqane.pds_files_to_db.config.CommandLineHandler;
 
-public class CommanLineTest {
+public class CommandLineTest {
 
 	private CommandLineHandler commandLineHandler = new CommandLineHandler();
 	
