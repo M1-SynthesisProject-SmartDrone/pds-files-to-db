@@ -1,4 +1,6 @@
-# Files to database
+# Files to database ![build image](https://github.com/M1-SynthesisProject-SmartDrone/pds-files-to-db/workflows/Java%20CI%20with%20Maven/badge.svg)
+
+
 
 This is a simple Java 11 Maven project that read in files in folder, extract their data and add them to the databse.
 
