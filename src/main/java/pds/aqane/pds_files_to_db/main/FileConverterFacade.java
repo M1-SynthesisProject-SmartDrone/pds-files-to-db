@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
@@ -28,6 +29,10 @@ import pds.aqane.pds_files_to_db.file.mavlink.MavlinkFolderCrawler;
 public class FileConverterFacade {
 
 	private static Logger LOGGER = Logger.getLogger(FileConverterFacade.class);
+
+	private static final int BATCH_SIZE = 100;
+
+	private static final int LOG_UPDATE_FREQUENCY = 2000;
 
 	private CommandLineHandler commandLineHandler = new CommandLineHandler();
 
@@ -54,7 +59,7 @@ public class FileConverterFacade {
 	public void processFolder() {
 		String folderName = commandLineHandler.getFolderName();
 		Long fromId = commandLineHandler.getIdBegin();
-		
+
 		MavlinkFolderCrawler crawler = new MavlinkFolderCrawler(folderName, fromId);
 		LOGGER.info("Start crawl in folder " + folderName);
 		Map<MavlinkStructName, List<MavlinkCSVFileReader>> wantedFiles = crawler.findAllWantedFiles();
@@ -62,13 +67,13 @@ public class FileConverterFacade {
 		if (wantedFiles.entrySet().size() == 0) {
 			LOGGER.warn("No file found starting by id n°" + fromId);
 		}
-		
+
 		for (var entry : wantedFiles.entrySet()) {
 			try {
 				processEntry(entry);
 			} catch (Exception exception) {
 				// We don't want to continue
-				LOGGER.error("An error occured while processing entry : " + exception.getMessage());
+				LOGGER.error("An error occured while processing entry : ", exception);
 				break;
 			}
 		}
@@ -82,18 +87,30 @@ public class FileConverterFacade {
 		// Just to be sure, we will sort file ids here (it is probably made while
 		// crawling, but this is important)
 		readers.sort(Comparator.comparing(MavlinkCSVFileReader::getId));
+		int counter = 0;
 		for (var reader : readers) {
-			LOGGER.info("Process file n°" + reader.getId());
+			LOGGER.info("Process file n°" + reader.getId() + " : " + reader.getBaseFilename());
 			reader.openFileAndReadHeaders();
 			while (reader.hasMoreLinesToRead()) {
-				List<BaseMavlinkStructData> dataList = reader.readBatchMappedToHeaders(100)
+				List<BaseMavlinkStructData> dataList = reader.readBatchMappedToHeaders(BATCH_SIZE)
 						.stream()
-						.map(m -> structConverter.convertLineWithHeaders(m, structName))
+						.map(convertLine(structName))
 						.flatMap(Optional::stream)
 						.collect(Collectors.toList());
-				dbInserter.insertBatch(dataList);
-			}
+				if (!dataList.isEmpty()) {
+					dbInserter.insertBatch(dataList);
 
+					counter += dataList.size();
+					if (counter != 0 && counter % LOG_UPDATE_FREQUENCY == 0) {
+						LOGGER.info(counter + " rows inserted");
+					}
+				}
+			}
+			LOGGER.info("Inserted " + counter + " rows from file " + reader.getBaseFilename());
 		}
+	}
+
+	private Function<Map<String, String>, Optional<BaseMavlinkStructData>> convertLine(MavlinkStructName structName) {
+		return m -> structConverter.convertLineWithHeaders(m, structName);
 	}
 }

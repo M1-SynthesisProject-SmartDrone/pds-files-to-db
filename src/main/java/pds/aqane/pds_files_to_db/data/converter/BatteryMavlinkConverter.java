@@ -27,6 +27,7 @@ class BatteryMavlinkConverter extends MavlinkConverter {
 		data.setBatteryRemaining(Integer.parseInt(toConvert.get(BatteryHeaders.BATTERY_REMAINING.getHeaderName())));
 		data.setCurrentBattery(Integer.parseInt(toConvert.get(BatteryHeaders.CURRENT_BATTERY.getHeaderName())));
 		data.setEnergyConsumed(Integer.parseInt(toConvert.get(BatteryHeaders.ENERGY_CONSUMED.getHeaderName())));
+		data.setCurrentConsumed(Integer.parseInt(toConvert.get(BatteryHeaders.CURRENT_CONSUMED.getHeaderName())));
 		data.setTemperature(Integer.parseInt(toConvert.get(BatteryHeaders.TEMPERATURE.getHeaderName())));
 		data.setTimeRemaining(Integer.parseInt(toConvert.get(BatteryHeaders.TIME_REMAINING.getHeaderName())));
 		

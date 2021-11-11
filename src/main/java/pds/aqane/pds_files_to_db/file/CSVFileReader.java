@@ -37,6 +37,10 @@ public class CSVFileReader {
 	public boolean hasMoreLinesToRead() {
 		return lastLineRead != null;
 	}
+	
+	public String getBaseFilename() {
+		return file.getName();
+	}
 
 	/**
 	 * Read the first line of the file in order to store headers. The cursor in the
@@ -87,7 +91,7 @@ public class CSVFileReader {
 		String[] split = line.split(separator);
 		if (split.length != headers.length) {
 			throw new IllegalArgumentException(
-					"Line read have " + split.length + " elements wherehas we have " + headers.length + " headers");
+					"Line read have " + split.length + " elements wherehas we have " + headers.length + " headers. Cannot map line");
 		}
 		Map<String, String> map = new HashMap<>(split.length);
 		for (int index = 0; index < split.length; index++) {

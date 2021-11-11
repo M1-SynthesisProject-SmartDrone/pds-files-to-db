@@ -36,7 +36,6 @@ public class MavlinkDbInserter {
 		if(structDataList.size() == 0) {
 			return;
 		}
-		LOGGER.info("Inserting " + structDataList.size() + " rows");
 		Connection connection = DatabaseConnection.getConnection();
 		String query = structDataList.get(0).accept(queryVisitor);
 		PreparedStatement statement = connection.prepareStatement(query);
