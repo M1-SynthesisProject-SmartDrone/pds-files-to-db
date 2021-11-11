@@ -24,7 +24,7 @@
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- JDBC : https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+		<!-- JDBC POSTGRESQL : https://mvnrepository.com/artifact/org.postgresql/postgresql -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -42,7 +42,26 @@
 			<artifactId>commons-cli</artifactId>
 			<version>1.4</version>
 		</dependency>
+
+		<!-- ==== FOR TESTS ==== -->
+		<!-- SCRIPT RUNNER https://mvnrepository.com/artifact/org.hsqldb/sqltool -->
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>sqltool</artifactId>
+			<version>2.3.3</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- JDBC H2 : https://mvnrepository.com/artifact/com.h2database/h2 -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.200</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
+
+
 
 	<build>
 		<pluginManagement><!-- lock down plugins versions to avoid using Maven 

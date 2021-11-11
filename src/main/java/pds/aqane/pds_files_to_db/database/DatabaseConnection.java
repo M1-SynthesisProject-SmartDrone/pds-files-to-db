@@ -3,6 +3,9 @@ package pds.aqane.pds_files_to_db.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Objects;
+
+import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
 
 import pds.aqane.pds_files_to_db.config.PropertiesHandler;
 
@@ -23,6 +26,8 @@ public class DatabaseConnection {
 	private String host;
 	private String user;
 	private String password;
+	
+	private boolean isInitialized = false;
 
 	/**
 	 * Init the connection parameters with the parameters in the
@@ -35,17 +40,19 @@ public class DatabaseConnection {
 		instance.host = propertiesHandler.getProperty("database.host");
 		instance.user = propertiesHandler.getProperty("database.user");
 		instance.password = propertiesHandler.getProperty("database.password");
+		instance.isInitialized = true;
 	}
 
 	/**
 	 * Init the connection parameters with custom parameters.
 	 */
 	public static void init(String driver, String dbName, String host, String user, String password) {
-		instance.driver = driver;
-		instance.dbName = dbName;
-		instance.host = host;
-		instance.user = user;
-		instance.password = password;
+		instance.driver = Objects.requireNonNull(driver);
+		instance.dbName = Objects.requireNonNull(dbName);
+		instance.host = Objects.requireNonNull(host);
+		instance.user = Objects.requireNonNull(user);
+		instance.password = Objects.requireNonNull(password);
+		instance.isInitialized = true;
 	}
 
 	/**
@@ -59,6 +66,9 @@ public class DatabaseConnection {
 	private Connection getInstanceConnection() {
 		// Only a single thread accessing it, no need double check method
 		if (connection == null) {
+			if(!isInitialized) {
+				init();
+			}
 			try {
 				String url = "jdbc:" + driver + "://" + host + "/" + dbName;
 				connection = DriverManager.getConnection(url, user, password);
