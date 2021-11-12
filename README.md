@@ -30,4 +30,4 @@ This is a command line application that waits for two (one optional) arguments :
  1. The path of the folder to parse
  2. (optional) the id where to start. Useful if we have a folder that contains already parsed files.
 
-## The filesystem (WIP)
+## The filesystem
