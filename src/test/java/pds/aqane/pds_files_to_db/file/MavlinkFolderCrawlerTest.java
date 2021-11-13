@@ -30,6 +30,7 @@ import pds.aqane.pds_files_to_db.file.mavlink.MavlinkFolderCrawler;
  */
 public class MavlinkFolderCrawlerTest {
 
+	// We are sure that this folder will be destroyed anyways (test success or fail)
 	@Rule
 	public TemporaryFolder tempFolder = new TemporaryFolder();
 	
