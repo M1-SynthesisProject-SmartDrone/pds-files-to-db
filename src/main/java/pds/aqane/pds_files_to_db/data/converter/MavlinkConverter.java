@@ -12,11 +12,12 @@ import pds.aqane.pds_files_to_db.data.BaseMavlinkStructData;
  * @author Aldric Vitali Silvestre
  */
 abstract class MavlinkConverter {
-	
+
 	protected static Logger LOGGER = Logger.getLogger(MavlinkConverter.class);
-	
+
 	/**
 	 * Try to convert the map, but returns an empty optional if an error occurs
+	 * 
 	 * @param toConvert
 	 * @return
 	 */
@@ -28,7 +29,7 @@ abstract class MavlinkConverter {
 			return Optional.empty();
 		}
 	}
-	
+
 	/**
 	 * Try to convert the map, but throw a runtime exception if an error occurs.
 	 * 
@@ -38,6 +39,6 @@ abstract class MavlinkConverter {
 	 * @throws NumberFormatException
 	 */
 	public abstract BaseMavlinkStructData convertWithPotentialThrow(Map<String, String> toConvert) throws IllegalArgumentException, NumberFormatException;
-	
+
 	protected abstract boolean hasAllFields(Map<String, String> toConvert);
 }

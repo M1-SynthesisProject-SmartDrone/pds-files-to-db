@@ -20,6 +20,7 @@ class AltitudeMavlinkConverter extends MavlinkConverter {
 		if (!hasAllFields(toConvert)) {
 			throw new IllegalArgumentException("Fields missing in the line read : " + toConvert.toString());
 		}
+		toConvert = ConverterUtility.convertCppNans(toConvert);
 		AltitudeStructData data = new AltitudeStructData();
 
 		data.setTimestamp(Long.parseLong(toConvert.get(AltitudeHeaders.TIMESTAMP.getHeaderName())));

@@ -52,8 +52,8 @@ public class ConverterTest {
 		Map<String, String> toTest = HIGHRES_LINE_REF;
 		HighresStructData structData = (HighresStructData) converter.convertLineWithHeadersOrThrow(toTest, MavlinkStructName.HIGHRES);
 		assertEquals(2.2222, structData.getAbsPressure(), 0.0001);
-		assertEquals(0.156, structData.getXacc(), 0.0001);
-		assertEquals(34.9865, structData.getYacc(), 0.0001);
+		assertEquals(Float.NaN, structData.getXacc(), 0.0001);
+		assertEquals(Float.NaN, structData.getYacc(), 0.0001);
 		assertEquals(78.12, structData.getYmag(), 0.0001);
 	}
 	
@@ -81,7 +81,7 @@ public class ConverterTest {
 	private static final Map<String, String> ALTITUDE_LINE_REF = Map.of(
 			"timestamp", "123456",
 			"altitude_monotonic", "0.1234",
-			"altitude_amsl", "0.1234",
+			"altitude_amsl", "nan",
 			"altitude_local", "0.1234",
 			"altitude_relative", "0.1234",
 			"altitude_terrain", "0.1234",
@@ -90,7 +90,7 @@ public class ConverterTest {
 	// More than 10 entries, we cannot use Map.of
 	private static final Map<String, String> HIGHRES_LINE_REF = Map.ofEntries(
 			Map.entry("timestamp", "123456"),
-			Map.entry("xacc", "0.156"), Map.entry("yacc", "34.9865"), Map.entry("zacc", "23.1234"),
+			Map.entry("xacc", "-nan"), Map.entry("yacc", "nan"), Map.entry("zacc", "nan"),
 			Map.entry("xgyro", "0.156"), Map.entry("ygyro", "34.9865"), Map.entry("zgyro", "23.1234"),
 			Map.entry("xmag", "0.156"), Map.entry("ymag", "78.12"), Map.entry("zmag", "23.1234"),
 			Map.entry("abs_pressure", "2.2222"),

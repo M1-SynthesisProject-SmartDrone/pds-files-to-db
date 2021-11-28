@@ -20,6 +20,7 @@ class BatteryMavlinkConverter extends MavlinkConverter {
 		if (!hasAllFields(toConvert)) {
 			throw new IllegalArgumentException("Fields missing in the line read : " + toConvert.toString());
 		}
+		toConvert = ConverterUtility.convertCppNans(toConvert);
 		BatteryStructData data = new BatteryStructData();
 
 		data.setTimestamp(Long.parseLong(toConvert.get(BatteryHeaders.TIMESTAMP.getHeaderName())));
@@ -30,7 +31,7 @@ class BatteryMavlinkConverter extends MavlinkConverter {
 		data.setCurrentConsumed(Integer.parseInt(toConvert.get(BatteryHeaders.CURRENT_CONSUMED.getHeaderName())));
 		data.setTemperature(Integer.parseInt(toConvert.get(BatteryHeaders.TEMPERATURE.getHeaderName())));
 		data.setTimeRemaining(Integer.parseInt(toConvert.get(BatteryHeaders.TIME_REMAINING.getHeaderName())));
-		
+
 		return data;
 	}
 }

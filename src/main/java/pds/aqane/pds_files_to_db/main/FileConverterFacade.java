@@ -94,7 +94,7 @@ public class FileConverterFacade {
 			while (reader.hasMoreLinesToRead()) {
 				List<BaseMavlinkStructData> dataList = reader.readBatchMappedToHeaders(BATCH_SIZE)
 						.stream()
-						.map(convertLine(structName))
+						.map(convertToStructData(structName))
 						.flatMap(Optional::stream)
 						.collect(Collectors.toList());
 				if (!dataList.isEmpty()) {
@@ -110,7 +110,7 @@ public class FileConverterFacade {
 		}
 	}
 
-	private Function<Map<String, String>, Optional<BaseMavlinkStructData>> convertLine(MavlinkStructName structName) {
+	private Function<Map<String, String>, Optional<BaseMavlinkStructData>> convertToStructData(MavlinkStructName structName) {
 		return m -> structConverter.convertLineWithHeaders(m, structName);
 	}
 }

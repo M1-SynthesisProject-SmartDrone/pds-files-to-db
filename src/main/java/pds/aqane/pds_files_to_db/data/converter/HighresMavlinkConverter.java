@@ -20,6 +20,7 @@ class HighresMavlinkConverter extends MavlinkConverter {
 		if (!hasAllFields(toConvert)) {
 			throw new IllegalArgumentException("Fields missing in the line read : " + toConvert.toString());
 		}
+		toConvert = ConverterUtility.convertCppNans(toConvert);
 		HighresStructData data = new HighresStructData();
 		data.setTimestamp(Long.parseLong(toConvert.get(HighresHeaders.TIMESTAMP.getHeaderName())));
 		
