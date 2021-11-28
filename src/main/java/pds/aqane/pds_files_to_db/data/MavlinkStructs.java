@@ -2,6 +2,10 @@ package pds.aqane.pds_files_to_db.data;
 
 import java.util.function.Supplier;
 
+import pds.aqane.pds_files_to_db.data.implems.AltitudeStructData;
+import pds.aqane.pds_files_to_db.data.implems.BatteryStructData;
+import pds.aqane.pds_files_to_db.data.implems.HighresStructData;
+
 /**
  * Each enum contains the base name of the file and a supplier to create new
  * instances.

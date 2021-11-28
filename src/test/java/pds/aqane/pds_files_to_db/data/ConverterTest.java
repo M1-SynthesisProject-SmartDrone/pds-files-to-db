@@ -10,6 +10,9 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 
 import pds.aqane.pds_files_to_db.data.converter.MavlinkStructConverter;
+import pds.aqane.pds_files_to_db.data.implems.AltitudeStructData;
+import pds.aqane.pds_files_to_db.data.implems.BatteryStructData;
+import pds.aqane.pds_files_to_db.data.implems.HighresStructData;
 
 /**
  * From multiple map with headers, parse them and check if parsing succeded.

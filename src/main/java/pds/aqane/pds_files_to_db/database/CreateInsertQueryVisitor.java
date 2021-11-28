@@ -1,8 +1,8 @@
 package pds.aqane.pds_files_to_db.database;
 
-import pds.aqane.pds_files_to_db.data.AltitudeStructData;
-import pds.aqane.pds_files_to_db.data.BatteryStructData;
-import pds.aqane.pds_files_to_db.data.HighresStructData;
+import pds.aqane.pds_files_to_db.data.implems.AltitudeStructData;
+import pds.aqane.pds_files_to_db.data.implems.BatteryStructData;
+import pds.aqane.pds_files_to_db.data.implems.HighresStructData;
 import pds.aqane.pds_files_to_db.data.visitor.MavlinkStructVisitor;
 
 /**

@@ -3,13 +3,13 @@ package pds.aqane.pds_files_to_db.data.converter;
 import java.util.Arrays;
 import java.util.Map;
 
-import pds.aqane.pds_files_to_db.data.AltitudeStructData;
-import pds.aqane.pds_files_to_db.data.BatteryStructData;
-import pds.aqane.pds_files_to_db.data.HighresStructData;
 import pds.aqane.pds_files_to_db.data.headers.AltitudeHeaders;
 import pds.aqane.pds_files_to_db.data.headers.BatteryHeaders;
 import pds.aqane.pds_files_to_db.data.headers.HighresHeaders;
 import pds.aqane.pds_files_to_db.data.headers.IMavlinkHeaders;
+import pds.aqane.pds_files_to_db.data.implems.AltitudeStructData;
+import pds.aqane.pds_files_to_db.data.implems.BatteryStructData;
+import pds.aqane.pds_files_to_db.data.implems.HighresStructData;
 import pds.aqane.pds_files_to_db.data.visitor.MavlinkStructVisitor;
 
 public class CheckConversionVisitor implements MavlinkStructVisitor<Void> {

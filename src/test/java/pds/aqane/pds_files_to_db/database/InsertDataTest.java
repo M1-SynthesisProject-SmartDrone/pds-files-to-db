@@ -19,8 +19,8 @@ import org.hsqldb.cmdline.SqlFile;
 import org.junit.Before;
 import org.junit.Test;
 
-import pds.aqane.pds_files_to_db.data.AltitudeStructData;
 import pds.aqane.pds_files_to_db.data.BaseMavlinkStructData;
+import pds.aqane.pds_files_to_db.data.implems.AltitudeStructData;
 
 /**
  * Insert a list of data into databse and check if insertions were made correctly.

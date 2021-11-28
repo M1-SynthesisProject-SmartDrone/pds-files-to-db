@@ -1,5 +1,7 @@
-package pds.aqane.pds_files_to_db.data;
+package pds.aqane.pds_files_to_db.data.implems;
 
+import pds.aqane.pds_files_to_db.data.BaseMavlinkStructData;
+import pds.aqane.pds_files_to_db.data.MavlinkStructs;
 import pds.aqane.pds_files_to_db.data.visitor.MavlinkStructVisitor;
 
 public class AltitudeStructData extends BaseMavlinkStructData {
