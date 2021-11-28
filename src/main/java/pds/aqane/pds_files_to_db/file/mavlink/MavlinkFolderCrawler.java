@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import pds.aqane.pds_files_to_db.config.PropertiesHandler;
-import pds.aqane.pds_files_to_db.data.MavlinkStructName;
+import pds.aqane.pds_files_to_db.data.MavlinkStructs;
 
 /**
  * From a folder navigate through all files in it and create a CSVFileReader for
@@ -41,7 +41,7 @@ public class MavlinkFolderCrawler {
 		this.idBegin = fromId;
 	}
 
-	public Map<MavlinkStructName, List<MavlinkCSVFileReader>> findAllWantedFiles() {
+	public Map<MavlinkStructs, List<MavlinkCSVFileReader>> findAllWantedFiles() {
 		return Arrays.stream(folder.listFiles())
 				.map(this::convertToFileReader)
 				.flatMap(Optional::stream) // remove the non correct files (i.e the empty optionals)
@@ -59,12 +59,12 @@ public class MavlinkFolderCrawler {
 	private Optional<MavlinkCSVFileReader> convertToFileReader(File file) {
 		String baseFilename = file.getName();
 		String completeFilename = file.getAbsolutePath();
-		Optional<MavlinkStructName> structNameOpt = findStructName(baseFilename);
+		Optional<MavlinkStructs> structNameOpt = findStructName(baseFilename);
 		if (structNameOpt.isPresent()) {
 			Optional<Long> fileIdOpt = findFileId(baseFilename);
 			if (fileIdOpt.isPresent()) {
 				Long fileId = fileIdOpt.get();
-				MavlinkStructName structName = structNameOpt.get();
+				MavlinkStructs structName = structNameOpt.get();
 				if (fileId >= this.idBegin) {
 					return Optional.of(new MavlinkCSVFileReader(completeFilename, csvSeparator, structName, fileId));
 				}
@@ -73,8 +73,8 @@ public class MavlinkFolderCrawler {
 		return Optional.empty();
 	}
 
-	private Optional<MavlinkStructName> findStructName(String filename) {
-		for (MavlinkStructName structName : MavlinkStructName.values()) {
+	private Optional<MavlinkStructs> findStructName(String filename) {
+		for (MavlinkStructs structName : MavlinkStructs.values()) {
 			if (filename.startsWith(structName.getStructName())) {
 				return Optional.of(structName);
 			}

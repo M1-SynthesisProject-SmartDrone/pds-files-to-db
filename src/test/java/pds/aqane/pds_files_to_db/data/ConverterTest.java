@@ -23,7 +23,7 @@ public class ConverterTest {
 	@Test
 	public void parseAltitudeData() {
 		Map<String, String> toTest = ALTITUDE_LINE_REF;
-		AltitudeStructData altitudeStructData = (AltitudeStructData) converter.convertLineWithHeadersOrThrow(toTest, MavlinkStructName.ALTITUDE);
+		AltitudeStructData altitudeStructData = (AltitudeStructData) converter.convertLineWithHeadersOrThrow(toTest, MavlinkStructs.ALTITUDE);
 		assertEquals(123456, altitudeStructData.getTimestamp());
 		assertEquals(0.1234, altitudeStructData.getAltitudeMonotonic(), 0.0001);
 	}
@@ -31,7 +31,7 @@ public class ConverterTest {
 	@Test
 	public void parseAltitudeDataWithOptional() {
 		Map<String, String> toTest = ALTITUDE_LINE_REF;
-		Optional<BaseMavlinkStructData> result = converter.convertLineWithHeaders(toTest, MavlinkStructName.ALTITUDE);
+		Optional<BaseMavlinkStructData> result = converter.convertLineWithHeaders(toTest, MavlinkStructs.ALTITUDE);
 		assertTrue(result.isPresent());
 		assertTrue(result.get() instanceof AltitudeStructData);
 		AltitudeStructData altitudeStructData = (AltitudeStructData) result.get();
@@ -42,7 +42,7 @@ public class ConverterTest {
 	@Test
 	public void parseBatteryData() {
 		Map<String, String> toTest = BATTERY_LINE_REF;
-		BatteryStructData structData = (BatteryStructData) converter.convertLineWithHeadersOrThrow(toTest, MavlinkStructName.BATTERY_STATUS);
+		BatteryStructData structData = (BatteryStructData) converter.convertLineWithHeadersOrThrow(toTest, MavlinkStructs.BATTERY_STATUS);
 		assertEquals(12, structData.getEnergyConsumed());
 		assertEquals(78, structData.getTemperature());
 	}
@@ -50,7 +50,7 @@ public class ConverterTest {
 	@Test
 	public void parseHighresData() {
 		Map<String, String> toTest = HIGHRES_LINE_REF;
-		HighresStructData structData = (HighresStructData) converter.convertLineWithHeadersOrThrow(toTest, MavlinkStructName.HIGHRES);
+		HighresStructData structData = (HighresStructData) converter.convertLineWithHeadersOrThrow(toTest, MavlinkStructs.HIGHRES);
 		assertEquals(2.2222, structData.getAbsPressure(), 0.0001);
 		assertEquals(Float.NaN, structData.getXacc(), 0.0001);
 		assertEquals(Float.NaN, structData.getYacc(), 0.0001);
@@ -62,7 +62,7 @@ public class ConverterTest {
 		// don't modif the original
 		Map<String, String> copy = deepCopy(HIGHRES_LINE_REF);
 		copy.remove("abs_pressure");
-		converter.convertLineWithHeadersOrThrow(copy, MavlinkStructName.HIGHRES);
+		converter.convertLineWithHeadersOrThrow(copy, MavlinkStructs.HIGHRES);
 	}
 	
 	@Test(expected = NumberFormatException.class)
@@ -70,7 +70,7 @@ public class ConverterTest {
 		// don't modif the original
 		Map<String, String> copy = deepCopy(HIGHRES_LINE_REF);
 		copy.put("abs_pressure", "test");
-		converter.convertLineWithHeadersOrThrow(copy, MavlinkStructName.HIGHRES);
+		converter.convertLineWithHeadersOrThrow(copy, MavlinkStructs.HIGHRES);
 	}
 
 	private Map<String, String> deepCopy(Map<String, String> toCopy) {

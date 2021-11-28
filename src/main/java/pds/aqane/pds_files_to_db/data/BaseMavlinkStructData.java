@@ -10,18 +10,18 @@ import pds.aqane.pds_files_to_db.data.visitor.MavlinkStructVisitor;
  */
 public abstract class BaseMavlinkStructData {
 
-	private MavlinkStructName structName;
+	private MavlinkStructs structName;
 	
 	private Long id;
 
 	private long timestamp;
 
-	public BaseMavlinkStructData(MavlinkStructName structName) {
+	public BaseMavlinkStructData(MavlinkStructs structName) {
 		super();
 		this.structName = structName;
 	}
 
-	public MavlinkStructName getStructName() {
+	public MavlinkStructs getStructName() {
 		return structName;
 	}
 

@@ -1,6 +1,6 @@
 package pds.aqane.pds_files_to_db.data.headers;
 
-public enum BatteryHeaders {
+public enum BatteryHeaders implements IMavlinkHeaders {
 	TIMESTAMP("timestamp"),
 
 	CURRENT_CONSUMED("current_consumed"),

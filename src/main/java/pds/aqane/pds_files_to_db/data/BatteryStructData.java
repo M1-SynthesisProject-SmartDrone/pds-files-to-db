@@ -12,7 +12,7 @@ public class BatteryStructData extends BaseMavlinkStructData {
 	private int timeRemaining;
 	
 	public BatteryStructData() {
-		super(MavlinkStructName.BATTERY_STATUS);
+		super(MavlinkStructs.BATTERY_STATUS);
 	}
 
 	public int getCurrentConsumed() {

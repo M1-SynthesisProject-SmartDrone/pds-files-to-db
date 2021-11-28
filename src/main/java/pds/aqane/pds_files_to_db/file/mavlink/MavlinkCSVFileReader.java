@@ -1,6 +1,6 @@
 package pds.aqane.pds_files_to_db.file.mavlink;
 
-import pds.aqane.pds_files_to_db.data.MavlinkStructName;
+import pds.aqane.pds_files_to_db.data.MavlinkStructs;
 import pds.aqane.pds_files_to_db.file.CSVFileReader;
 
 /**
@@ -11,17 +11,17 @@ import pds.aqane.pds_files_to_db.file.CSVFileReader;
  */
 public class MavlinkCSVFileReader extends CSVFileReader {
 
-	private MavlinkStructName mavlinkStructName;
+	private MavlinkStructs mavlinkStructName;
 	
 	private long id;
 	
-	public MavlinkCSVFileReader(String filename, String separator, MavlinkStructName structName, long id) {
+	public MavlinkCSVFileReader(String filename, String separator, MavlinkStructs structName, long id) {
 		super(filename, separator);
 		this.mavlinkStructName = structName;
 		this.id = id;
 	}
 
-	public MavlinkStructName getMavlinkStructName() {
+	public MavlinkStructs getMavlinkStructName() {
 		return mavlinkStructName;
 	}
 

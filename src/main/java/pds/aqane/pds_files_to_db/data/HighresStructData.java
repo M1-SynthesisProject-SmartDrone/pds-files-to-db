@@ -22,7 +22,7 @@ public class HighresStructData extends BaseMavlinkStructData {
 	private float temperature;
 
 	public HighresStructData() {
-		super(MavlinkStructName.HIGHRES);
+		super(MavlinkStructs.HIGHRES);
 	}
 
 	public float getXacc() {

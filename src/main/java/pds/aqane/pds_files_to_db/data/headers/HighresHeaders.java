@@ -1,6 +1,6 @@
 package pds.aqane.pds_files_to_db.data.headers;
 
-public enum HighresHeaders {
+public enum HighresHeaders implements IMavlinkHeaders {
 	TIMESTAMP("timestamp"),
 
 	X_ACC("xacc"),

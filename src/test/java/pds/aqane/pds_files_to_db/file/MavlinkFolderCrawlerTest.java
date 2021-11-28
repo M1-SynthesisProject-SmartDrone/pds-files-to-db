@@ -18,7 +18,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import pds.aqane.pds_files_to_db.data.MavlinkStructName;
+import pds.aqane.pds_files_to_db.data.MavlinkStructs;
 import pds.aqane.pds_files_to_db.file.mavlink.MavlinkCSVFileReader;
 import pds.aqane.pds_files_to_db.file.mavlink.MavlinkFolderCrawler;
 
@@ -39,13 +39,13 @@ public class MavlinkFolderCrawlerTest {
 		BiFunction<String, Integer, String> createTmpFile = (name, id) -> name + "-" + id + ".csv";
 		// Files to create in the temp folder
 		List<String> filenameList = List.of(
-				createTmpFile.apply(MavlinkStructName.BATTERY_STATUS.getStructName(), 1),
-				createTmpFile.apply(MavlinkStructName.BATTERY_STATUS.getStructName(), 2),
-				createTmpFile.apply(MavlinkStructName.ALTITUDE.getStructName(), 1),
-				createTmpFile.apply(MavlinkStructName.ALTITUDE.getStructName(), 2),
-				createTmpFile.apply(MavlinkStructName.ALTITUDE.getStructName(), 3),
-				createTmpFile.apply(MavlinkStructName.HIGHRES.getStructName(), 1),
-				createTmpFile.apply(MavlinkStructName.ALTITUDE.getStructName(), 4),
+				createTmpFile.apply(MavlinkStructs.BATTERY_STATUS.getStructName(), 1),
+				createTmpFile.apply(MavlinkStructs.BATTERY_STATUS.getStructName(), 2),
+				createTmpFile.apply(MavlinkStructs.ALTITUDE.getStructName(), 1),
+				createTmpFile.apply(MavlinkStructs.ALTITUDE.getStructName(), 2),
+				createTmpFile.apply(MavlinkStructs.ALTITUDE.getStructName(), 3),
+				createTmpFile.apply(MavlinkStructs.HIGHRES.getStructName(), 1),
+				createTmpFile.apply(MavlinkStructs.ALTITUDE.getStructName(), 4),
 				createTmpFile.apply("pepito", 1));
 		
 		for (String filename : filenameList) {
@@ -56,28 +56,28 @@ public class MavlinkFolderCrawlerTest {
 	@Test
 	public void findAllCorrectFiles() {
 		MavlinkFolderCrawler crawler = new MavlinkFolderCrawler(tempFolder.getRoot().getAbsolutePath(), 1);
-		Map<MavlinkStructName, List<MavlinkCSVFileReader>> wantedFiles = crawler.findAllWantedFiles();
+		Map<MavlinkStructs, List<MavlinkCSVFileReader>> wantedFiles = crawler.findAllWantedFiles();
 		long fileCount = wantedFiles.values().stream()
 				.flatMap(List::stream)
 				.count();
 		assertEquals(7, fileCount);
 		
-		assertEquals(4, wantedFiles.get(MavlinkStructName.ALTITUDE).size());
-		assertEquals(2, wantedFiles.get(MavlinkStructName.BATTERY_STATUS).size());
-		assertEquals(1, wantedFiles.get(MavlinkStructName.HIGHRES).size());
+		assertEquals(4, wantedFiles.get(MavlinkStructs.ALTITUDE).size());
+		assertEquals(2, wantedFiles.get(MavlinkStructs.BATTERY_STATUS).size());
+		assertEquals(1, wantedFiles.get(MavlinkStructs.HIGHRES).size());
 	}
 
 	@Test
 	public void findCorrectFilesFromSpecificId() {
 		MavlinkFolderCrawler crawler = new MavlinkFolderCrawler(tempFolder.getRoot().getAbsolutePath(), 2);
-		Map<MavlinkStructName, List<MavlinkCSVFileReader>> wantedFiles = crawler.findAllWantedFiles();
+		Map<MavlinkStructs, List<MavlinkCSVFileReader>> wantedFiles = crawler.findAllWantedFiles();
 		long fileCount = wantedFiles.values().stream()
 				.flatMap(List::stream)
 				.count();
 		assertEquals(4, fileCount);
 		
-		assertEquals(3, wantedFiles.get(MavlinkStructName.ALTITUDE).size());
-		assertEquals(1, wantedFiles.get(MavlinkStructName.BATTERY_STATUS).size());
-		assertFalse(wantedFiles.containsKey(MavlinkStructName.HIGHRES));
+		assertEquals(3, wantedFiles.get(MavlinkStructs.ALTITUDE).size());
+		assertEquals(1, wantedFiles.get(MavlinkStructs.BATTERY_STATUS).size());
+		assertFalse(wantedFiles.containsKey(MavlinkStructs.HIGHRES));
 	}
 }

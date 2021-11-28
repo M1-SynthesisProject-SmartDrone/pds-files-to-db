@@ -76,7 +76,7 @@ public class InsertDataTest {
 		resultSet2.next();
 		assertEquals(1, resultSet2.getInt("id"));
 		assertEquals(0l, resultSet2.getLong("timestamp"));
-		assertEquals(0f, resultSet2.getFloat("altitude_amsl"), 0.00001f);
+		assertEquals(Float.NaN, resultSet2.getFloat("altitude_amsl"), 0.00001f);
 	}
 	
 	private List<BaseMavlinkStructData> createAltitudeList(int size) {
@@ -89,7 +89,7 @@ public class InsertDataTest {
 		var data = new AltitudeStructData();
 		data.setTimestamp(i);
 		data.setAltitudeAmsl(i);
-		data.setAltitudeLocal(i);
+		data.setAltitudeLocal(Float.NaN);
 		data.setAltitudeMonotonic(i);
 		data.setAltitudeRelative(i);
 		data.setAltitudeTerrain(i);

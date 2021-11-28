@@ -12,7 +12,7 @@ public class AltitudeStructData extends BaseMavlinkStructData {
 	private float bottomClearance;
 	
 	public AltitudeStructData() {
-		super(MavlinkStructName.ALTITUDE);
+		super(MavlinkStructs.ALTITUDE);
 	}
 
 	public float getAltitudeMonotonic() {

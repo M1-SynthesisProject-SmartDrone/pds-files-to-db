@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
 
 import pds.aqane.pds_files_to_db.config.CommandLineHandler;
 import pds.aqane.pds_files_to_db.data.BaseMavlinkStructData;
-import pds.aqane.pds_files_to_db.data.MavlinkStructName;
+import pds.aqane.pds_files_to_db.data.MavlinkStructs;
 import pds.aqane.pds_files_to_db.data.converter.MavlinkStructConverter;
 import pds.aqane.pds_files_to_db.database.DatabaseConnection;
 import pds.aqane.pds_files_to_db.database.MavlinkDbInserter;
@@ -62,7 +62,7 @@ public class FileConverterFacade {
 
 		MavlinkFolderCrawler crawler = new MavlinkFolderCrawler(folderName, fromId);
 		LOGGER.info("Start crawl in folder " + folderName);
-		Map<MavlinkStructName, List<MavlinkCSVFileReader>> wantedFiles = crawler.findAllWantedFiles();
+		Map<MavlinkStructs, List<MavlinkCSVFileReader>> wantedFiles = crawler.findAllWantedFiles();
 
 		if (wantedFiles.entrySet().size() == 0) {
 			LOGGER.warn("No file found starting by id n°" + fromId);
@@ -80,8 +80,8 @@ public class FileConverterFacade {
 		LOGGER.info("End of process");
 	}
 
-	private void processEntry(Entry<MavlinkStructName, List<MavlinkCSVFileReader>> entry) throws IOException, SQLException {
-		MavlinkStructName structName = entry.getKey();
+	private void processEntry(Entry<MavlinkStructs, List<MavlinkCSVFileReader>> entry) throws IOException, SQLException {
+		MavlinkStructs structName = entry.getKey();
 		List<MavlinkCSVFileReader> readers = entry.getValue();
 		LOGGER.info("Process " + structName.getStructName() + " files");
 		// Just to be sure, we will sort file ids here (it is probably made while
@@ -110,7 +110,7 @@ public class FileConverterFacade {
 		}
 	}
 
-	private Function<Map<String, String>, Optional<BaseMavlinkStructData>> convertToStructData(MavlinkStructName structName) {
+	private Function<Map<String, String>, Optional<BaseMavlinkStructData>> convertToStructData(MavlinkStructs structName) {
 		return m -> structConverter.convertLineWithHeaders(m, structName);
 	}
 }

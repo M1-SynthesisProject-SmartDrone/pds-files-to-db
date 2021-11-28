@@ -1,6 +1,6 @@
 package pds.aqane.pds_files_to_db.data.headers;
 
-public enum AltitudeHeaders {
+public enum AltitudeHeaders implements IMavlinkHeaders {
 	TIMESTAMP("timestamp"),
 
 	ALTITUDE_MONOTONIC("altitude_monotonic"),
